@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 
+#######################################################################
+###                            HEAD
+####################################################################### 
+-->
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>RPG Rulebook Style</title>
+    <link href="siteRPG1-Dateien/css2.css" rel="stylesheet">
+
+    <!-- ######################### STYLE ############################# -->
+    <style>
+        /* Importing fonts that match the vibe of the provided page */
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Cinzel+Decorative:wght@700&display=swap');
+
+        .rpg-page-container {
+            padding: 20px;
+            background-color: #333;
+            /* Dark background to make the "page" pop */
+            display: flex;
+            justify-content: center;
+        }
+
+        .rpg-book-page {
+            position: relative;
+            width: 95%;
+            max-width: 1100px;
+            /* But don't get too wide to maintain readability */
+            min-height: 11in;
+            margin: 0 auto;
+            /* Center the page */
+            /* Standard US Letter size */
+            min-height: 11in;
+            background-color: #fcf5e5;
+            /* Base parchment color */
+            background-image: url('https://www.transparenttextures.com/patterns/p6.png');
+            /* Subtle paper texture */
+            padding: 60px 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #2c2115;
+            font-family: 'Crimson Pro', serif;
+            overflow: hidden;
+        }
+
+        .rpg-book-page::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Create a soft inner shadow */
+            box-shadow: inset 0 0 100px rgba(139, 69, 19, 0.2);
+            pointer-events: none;
+            /* So you can still click things under it */
+        }
+
+        .page-grid {
+            display: grid;
+            /* 25% for sidebar, 75% for main content */
+            /* grid-template-columns: 20% 70%; */
+            grid-template-columns: 180px 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+            /* Ensures it stays above the vignette */
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            width: 95%;
+            /* Ensure it doesn't exceed the parent */
+            box-sizing: border-box;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Decorative Header matching the red pattern in the image */
+        .decorative-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            /* Adjust based on your image aspect ratio */
+
+            background-image: url("../Image/Frise2.png");
+            background-repeat: repeat-x;
+            background-position: left top;
+
+            /* FIX 1: Ensures tiles touch perfectly without gaps */
+            background-size: auto 100%;
+
+            /* FIX 2: Makes the checkerboard/white background disappear onto parchment */
+            mix-blend-mode: multiply;
+            /* Optional: boost the red ink if multiply makes it too dark */
+            filter: contrast(1.2) saturate(1.2);
+            opacity: 0.9;
+            z-index: 5;
+            /* Flip image UpsideDown */
+            transform: scaleY(-1);
+        }
+
+        .decorative-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            /* Adjust based on your image aspect ratio */
+
+            background-image: url("../Image/Frise2.png");
+            background-repeat: repeat-x;
+            background-position: left top;
+
+            /* FIX 1: Ensures tiles touch perfectly without gaps */
+            background-size: auto 100%;
+
+            /* FIX 2: Makes the checkerboard/white background disappear onto parchment */
+            mix-blend-mode: multiply;
+
+            /* Optional: boost the red ink if multiply makes it too dark */
+            filter: contrast(1.2) saturate(1.2);
+
+            opacity: 0.9;
+            z-index: 5;
+        }
+
+        /* Decorative Sidebar matching the ornate vertical line */
+        .decorative-sidebar-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            border-left: 1px solid #b33a3a;
+            background-image: linear-gradient(to bottom, transparent, #b33a3a 50%, transparent);
+            opacity: 0.3;
+        }
+
+        .decorative-sidebar-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            border-right: 0px solid #992222;
+            background-image: linear-gradient(to left, transparent, #992222 100%, transparent);
+            opacity: 0.2;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 40px;
+        }
+
+        .main-title2 {
+            font-family: 'Papyrus', serif;
+            font-size: 3.5rem;
+            color: #4a3c2c;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 20px 0;
+        }
+
+        .main-title3 {
+            font-family: "Papyrus", serif;
+            font-size: 5rem;
+            letter-spacing: 6px;
+
+            /* 1. Base Color */
+            color: #5e1914;
+
+            /* 2. The Texture Mask */
+            /* We use a subtle grain texture */
+            background-image: url('../Image/black-linen-2.png');
+            background-repeat: repeat;
+
+            /* 3. The Magic: Clipping the background to the text */
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            /* 4. Make the original color semi-transparent so the texture shows through */
+            -webkit-text-fill-color: rgba(94, 25, 20, 0.85);
+
+            /* 5. Add a very faint blur to simulate ink bleeding into the paper */
+            text-shadow: 0.5px 0.5px 1px rgba(94, 25, 20, 0.3);
+        }
+
+        .flavor-text {
+            font-style: italic;
+            color: #6b5a45;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* Red stylized section headings */
+        .section-heading1 {
+            font-family: "Papyrus", serif;
+            font-size: 4.5rem;
+            letter-spacing: 3px;
+            color: #5e1914;
+            margin-top: 75px;
+            margin-right: 50px;
+            margin-left: 50px;
+            text-align: center;
+        }
+
+        .section-heading2 {
+            font-family: 'Herculanum', serif;
+            color: #b33a3a;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            margin-top: 25px;
+            border-bottom: 1px solid rgba(179, 58, 58, 0.3);
+        }
+
+        .section-heading3 {
+            font-family: 'Herculanum', serif;
+            color: #512f2f;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
+
+        .quote-box {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 3px solid #b33a3a;
+            background: rgba(179, 58, 58, 0.05);
+            font-style: italic;
+        }
+
+
+
+        .illustration-1col {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .illustration-1col img {
+            width: 100%;
+            max-width: 100%;
+            /* Never wider than its column */
+            height: auto;
+            display: block;
+            margin: 20 auto;
+            mix-blend-mode: multiply;
+            /* Blends sketch with paper */
+
+            /* Boost contrast to make pencil lines sharper */
+            filter: contrast(0.9) brightness(0.9) sepia(0.3);
+
+            /* Layer 1: The Rectangular Edge Fade */
+            /* Layer 2: The Radial Corner Fade */
+            mask-image:
+                linear-gradient(to bottom, transparent, black 1%, black 99%, transparent),
+                linear-gradient(to right, transparent, black 1%, black 99%, transparent);
+
+
+            /* This tells the browser to keep only the area where ALL masks overlap */
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+        }
+
+        .illustration-2col {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .illustration-2col img {
+            width: 95%;
+            max-width: 100%;
+            /* Never wider than its column */
+            height: auto;
+            display: block;
+            margin: 20 auto;
+            mix-blend-mode: multiply;
+            /* Blends sketch with paper */
+
+            /* Boost contrast to make pencil lines sharper */
+            filter: contrast(0.9) brightness(0.9) sepia(0.3);
+
+            /* Layer 1: The Rectangular Edge Fade */
+            /* Layer 2: The Radial Corner Fade */
+            mask-image:
+                linear-gradient(to bottom, transparent, black 1%, black 99%, transparent),
+                linear-gradient(to right, transparent, black 1%, black 99%, transparent);
+
+
+            /* This tells the browser to keep only the area where ALL masks overlap */
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+        }
+
+        .illustration-full {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .illustration-full img {
+            width: 90%;
+            max-width: 95%;
+            /* Never wider than its column */
+            height: auto;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 0px;
+            margin-left: 30px;
+            margin-right: 70px;
+            mix-blend-mode: multiply;
+            /* Blends sketch with paper */
+
+            /* Boost contrast to make pencil lines sharper */
+            filter: contrast(0.9) brightness(0.9) sepia(0.3);
+
+            /* Layer 1: The Rectangular Edge Fade */
+            /* Layer 2: The Radial Corner Fade */
+
+
+            nomask-image: linear-gradient(to right,
+                    transparent 0%,
+                    /* â† MUST start at 0% with transparent */
+                    black 7%,
+                    /* Where full opacity begins */
+                    black 85%,
+                    /* Where full opacity ends */
+                    transparent 100%
+                    /* â† MUST end at 100% with transparent */
+                );
+
+            mask-image:
+                linear-gradient(to right,
+                    rgba(0, 0, 0, 0.000) 0%, rgba(0, 0, 0, 0.007) 1%, rgba(0, 0, 0, 0.047) 2%,
+                    rgba(0, 0, 0, 0.119) 3%, rgba(0, 0, 0, 0.269) 4%, rgba(0, 0, 0, 0.500) 5%,
+                    rgba(0, 0, 0, 0.731) 6%, rgba(0, 0, 0, 0.881) 7%, rgba(0, 0, 0, 0.953) 8%,
+                    rgba(0, 0, 0, 0.993) 9%, rgba(0, 0, 0, 1.000) 10%, rgba(0, 0, 0, 1.000) 90%,
+                    rgba(0, 0, 0, 0.993) 91%, rgba(0, 0, 0, 0.953) 92%, rgba(0, 0, 0, 0.881) 93%,
+                    rgba(0, 0, 0, 0.731) 94%, rgba(0, 0, 0, 0.500) 95%, rgba(0, 0, 0, 0.269) 96%,
+                    rgba(0, 0, 0, 0.119) 97%, rgba(0, 0, 0, 0.047) 98%, rgba(0, 0, 0, 0.007) 99%,
+                    rgba(0, 0, 0, 0.000) 100%),
+                linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.000) 0%, rgba(0, 0, 0, 0.007) 1%, rgba(0, 0, 0, 0.047) 2%,
+                    rgba(0, 0, 0, 0.119) 3%, rgba(0, 0, 0, 0.269) 4%, rgba(0, 0, 0, 0.500) 5%,
+                    rgba(0, 0, 0, 0.731) 6%, rgba(0, 0, 0, 0.881) 7%, rgba(0, 0, 0, 0.953) 8%,
+                    rgba(0, 0, 0, 0.993) 9%, rgba(0, 0, 0, 1.000) 10%, rgba(0, 0, 0, 1.000) 90%,
+                    rgba(0, 0, 0, 0.993) 91%, rgba(0, 0, 0, 0.953) 92%, rgba(0, 0, 0, 0.881) 93%,
+                    rgba(0, 0, 0, 0.731) 94%, rgba(0, 0, 0, 0.500) 95%, rgba(0, 0, 0, 0.269) 96%,
+                    rgba(0, 0, 0, 0.119) 97%, rgba(0, 0, 0, 0.047) 98%, rgba(0, 0, 0, 0.007) 99%,
+                    rgba(0, 0, 0, 0.000) 100%),
+                radial-gradient(ellipse 450% 450% at 50% 50%,
+                    rgba(0, 0, 0, 1.000) 0%, rgba(0, 0, 0, 0.993) 1%, rgba(0, 0, 0, 0.993) 2%,
+                    rgba(0, 0, 0, 0.993) 3%, rgba(0, 0, 0, 0.953) 4%, rgba(0, 0, 0, 0.953) 5%,
+                    rgba(0, 0, 0, 0.881) 6%, rgba(0, 0, 0, 0.818) 7%, rgba(0, 0, 0, 0.731) 8%,
+                    rgba(0, 0, 0, 0.622) 9%, rgba(0, 0, 0, 0.500) 10%, rgba(0, 0, 0, 0.378) 11%,
+                    rgba(0, 0, 0, 0.269) 12%, rgba(0, 0, 0, 0.182) 13%, rgba(0, 0, 0, 0.119) 14%,
+                    rgba(0, 0, 0, 0.047) 15%, rgba(0, 0, 0, 0.047) 16%, rgba(0, 0, 0, 0.007) 17%,
+                    rgba(0, 0, 0, 0.007) 18%, rgba(0, 0, 0, 0.000) 19%, rgba(0, 0, 0, 0.000) 81%,
+                    rgba(0, 0, 0, 0.007) 82%, rgba(0, 0, 0, 0.007) 83%, rgba(0, 0, 0, 0.047) 84%,
+                    rgba(0, 0, 0, 0.047) 85%, rgba(0, 0, 0, 0.119) 86%, rgba(0, 0, 0, 0.182) 87%,
+                    rgba(0, 0, 0, 0.269) 88%, rgba(0, 0, 0, 0.378) 89%, rgba(0, 0, 0, 0.500) 90%,
+                    rgba(0, 0, 0, 0.622) 91%, rgba(0, 0, 0, 0.731) 92%, rgba(0, 0, 0, 0.818) 93%,
+                    rgba(0, 0, 0, 0.881) 94%, rgba(0, 0, 0, 0.953) 95%, rgba(0, 0, 0, 0.953) 96%,
+                    rgba(0, 0, 0, 0.993) 97%, rgba(0, 0, 0, 0.993) 98%, rgba(0, 0, 0, 0.993) 99%,
+                    rgba(0, 0, 0, 1.000) 100%);
+            mask-composite: intersect;
+
+
+        }
+
+        .caption {
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #5e1914;
+            margin-top: 8px;
+            border-top: 1px solid rgba(94, 25, 20, 0.2);
+            display: inline-block;
+            padding-top: 5px;
+        }
+
+        /* Styling the Left Info Box */
+        .info-box {
+            background: rgba(94, 25, 20, 0.2);
+            /* Faint red/brown wash */
+            border: 1px solid rgba(94, 25, 20, 0.2);
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            /* Gives it a "tacked-on" look */
+            box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box h4 {
+            font-family: "Herculanum", serif;
+            color: #5e1914;
+            margin-top: 0;
+            text-transform: uppercase;
+            border-bottom: 1px solid #5e1914;
+            padding-bottom: 5px;
+        }
+
+        .sidebar-left {
+            /* Keeps the sidebar content from drifting too far up */
+            padding-top: 100px;
+        }
+
+        /* Adjust main content to handle its own columns */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            padding-right: 40px;
+            /* Create a 'safety zone' for the decorative border */
+        }
+    </style>
+    <!-- ######################### STYLE ############################# -->
+</head>
+
+<!-- 
+#######################################################################
+###                             BODY
+####################################################################### 
+-->
+
+<body>
+    <div class="rpg-page-container">
+        <div class="rpg-book-page">
+            <div class="decorative-header"></div>
+            <div class="page-grid">
+                <aside class="sidebar-left" style="padding-top: 0px; padding-left: 0px;">
+
+                    <div class="info-box" style="margin-top: 450px;">
+                        <h4>Lore Fragment</h4>
+                        <p>The Giants of the High Pass are said to be the literal children of the stone, born from the
+                            peaks during the great storms of the Second Age.</p>
+                    </div>
+                    <div class="info-box" style="margin-top: 100px;">
+                        <h4>Travel Warning</h4>
+                        <p>Avoid the narrow gaps during thunderstorms, as the "giants" are most active then.</p>
+                    </div>
+                </aside>
+
+
+                <main class="main-content">
+                    <header>
+                        <h1 class="main-title">aaLes Chroniques de l'Echiquier</h1>
+                        <p class="flavor-text">In the end Bilbo won the game, more by luck (as it seemed) than by
+                            wits...</p>
+                    </header>
+
+                    <div class="two-column-layout">
+                        <section>
+                            <p>Once the necessity for a die roll has been established, it must be determined who is
+                                going to
+                                make the roll, and which ability is most appropriate for the action.</p>
+
+                            <h2 class="section-heading">Who Rolls</h2>
+                            <p>Determining who is going to make the roll is easy in the case of actions chosen by the
+                                players,
+                                but can be less so if the roll is being made as a reaction to something described by the
+                                Loremaster.</p>
+
+                            <div class="quote-box">
+                                To do so, the players simply choose the Player-hero who is best suited to the task at
+                                hand...
+                            </div>
+                            <h2 class="section-heading">Who Rolls</h2>
+                            <p>Determining who is going to make the roll is easy in the case of actions chosen by the
+                                players,
+                                but can be less so if the roll is being made as a reaction to something described by the
+                                Loremaster.</p>
+                        </section>
+
+                        <section>
+                            <p>In general terms, if the rolled total is equal to or greater than the TN, the roll is a
+                                success;
+                                otherwise, it has failed.</p>
+
+                            <h2 class="section-heading">Repeating a Roll</h2>
+                            <p>As a rule, players only have one attempt at anything that is resolved with a die roll â€”
+                                whether
+                                they succeed or fail, they have done their best.</p>
+                            <div class="illustration-1col">
+                                <img src="siteRPG1-Dateien/Gemini_Generated_Image_1er5jv1er5jv1er5.png"
+                                    alt="Mountain Giant Sketch">
+                                <p class="caption">Figure 1.2: A Mountain Giant of the High Pass, preparing to hurl a
+                                    monolith.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+            </div>
+
+            <div class="illustration-full">
+                <img src="../Image/Lutin2.png" alt="Mountain Giant Sketch">
+                <p class="caption">Figure 1.2: A Mountain Giant of the High Pass, preparing to hurl a monolith.
+                </p>
+            </div>
+
+            <div class="rpg-book-page::after"></div>
+            <div class="decorative-sidebar-left"></div>
+            <div class="decorative-sidebar-right"></div>
+            <div class="decorative-footer"></div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

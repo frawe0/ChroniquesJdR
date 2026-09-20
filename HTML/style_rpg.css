@@ -1,0 +1,470 @@
+        /* Importing fonts that match the vibe of the provided page */
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Cinzel+Decorative:wght@700&display=swap');
+
+        p {
+            widows: 3;
+            /* Minimum 3 lignes en haut d'une colonne */
+            orphans: 3;
+            /* Minimum 3 lignes en bas d'une colonne */
+        }
+
+        .rpg-page-container {
+            padding: 20px;
+            background-color: #333;
+            /* Dark background to make the "page" pop */
+            display: flex;
+            justify-content: center;
+        }
+
+        .rpg-page-container_A4 {
+            padding: 20px;
+            background-color: #333;
+            /* Dark background to make the "page" pop */
+            display: flex;
+            justify-content: center;
+
+            page-break-after: always;
+            /* Force le saut de page à l'impression */
+            height: 297mm;
+            /* Taille A4 */
+            width: 210mm;
+            position: relative;
+            overflow: hidden;
+            /* Évite que le texte ne dépasse sur la page suivante */
+        }
+
+        .rpg-book-page {
+            position: relative;
+            width: 95%;
+            max-width: 1100px;
+            /* But don't get too wide to maintain readability */
+            min-height: 11in;
+            margin: 0 auto;
+            /* Center the page */
+            /* Standard US Letter size */
+            min-height: 11in;
+            background-color: #fcf5e5;
+            /* Base parchment color */
+            background-image: url('https://www.transparenttextures.com/patterns/p6.png');
+            /* Subtle paper texture */
+            padding: 60px 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #2c2115;
+            font-family: 'Crimson Pro', serif;
+            overflow: hidden;
+        }
+
+        .rpg-book-page::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Create a soft inner shadow */
+            box-shadow: inset 0 0 100px rgba(139, 69, 19, 0.2);
+            pointer-events: none;
+            /* So you can still click things under it */
+        }
+
+        .page-grid {
+            display: grid;
+            /* 25% for sidebar, 75% for main content */
+            /* grid-template-columns: 20% 70%; */
+            grid-template-columns: 165px 1fr;
+            #in pix size of the left margin gap: 40px;
+            position: relative;
+            z-index: 2;
+            /* Ensures it stays above the vignette */
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 99%;
+            /* Ensure it doesn't exceed the parent */
+            box-sizing: border-box;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Decorative Header matching the red pattern in the image */
+        .decorative-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            /* Adjust based on your image aspect ratio */
+
+            background-image: url("../Image/Frise2.png");
+            background-repeat: repeat-x;
+            background-position: left top;
+
+            /* FIX 1: Ensures tiles touch perfectly without gaps */
+            background-size: auto 100%;
+
+            /* FIX 2: Makes the checkerboard/white background disappear onto parchment */
+            mix-blend-mode: multiply;
+            /* Optional: boost the red ink if multiply makes it too dark */
+            filter: contrast(1.2) saturate(1.2);
+            opacity: 0.9;
+            z-index: 5;
+            /* Flip image UpsideDown */
+            transform: scaleY(-1);
+        }
+
+        .decorative-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            /* Adjust based on your image aspect ratio */
+
+            background-image: url("../Image/Frise2.png");
+            background-repeat: repeat-x;
+            background-position: left top;
+
+            /* FIX 1: Ensures tiles touch perfectly without gaps */
+            background-size: auto 100%;
+
+            /* FIX 2: Makes the checkerboard/white background disappear onto parchment */
+            mix-blend-mode: multiply;
+
+            /* Optional: boost the red ink if multiply makes it too dark */
+            filter: contrast(1.2) saturate(1.2);
+
+            opacity: 0.9;
+            z-index: 5;
+        }
+
+        /* Decorative Sidebar matching the ornate vertical line */
+        .decorative-sidebar-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            border-left: 1px solid #b33a3a;
+            background-image: linear-gradient(to bottom, transparent, #b33a3a 50%, transparent);
+            opacity: 0.3;
+        }
+
+        .decorative-sidebar-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            border-right: 0px solid #992222;
+            background-image: linear-gradient(to left, transparent, #992222 100%, transparent);
+            opacity: 0.2;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+            padding-top: 40px;
+        }
+
+        .main-title2 {
+            font-family: 'Papyrus', serif;
+            font-size: 3.5rem;
+            color: #4a3c2c;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 20px 0;
+        }
+
+        .main-title3 {
+            font-family: "Papyrus", serif;
+            font-size: 5rem;
+            letter-spacing: 6px;
+
+            /* 1. Base Color */
+            color: #5e1914;
+
+            /* 2. The Texture Mask */
+            /* We use a subtle grain texture */
+            background-image: url('../Image/black-linen-2.png');
+            background-repeat: repeat;
+
+            /* 3. The Magic: Clipping the background to the text */
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            /* 4. Make the original color semi-transparent so the texture shows through */
+            -webkit-text-fill-color: rgba(94, 25, 20, 0.85);
+
+            /* 5. Add a very faint blur to simulate ink bleeding into the paper */
+            text-shadow: 0.5px 0.5px 1px rgba(94, 25, 20, 0.3);
+        }
+
+        .flavor-text {
+            font-style: italic;
+            color: #6b5a45;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* Red stylized section headings */
+        .section-heading1 {
+            font-family: "Aniron", serif;
+            font-size: 3.8rem;
+            letter-spacing: 0px;
+            color: #5e1914;
+            margin-top: 75px;
+            margin-right: 50px;
+            margin-left: 50px;
+            text-align: center;
+        }
+
+        /* Red stylized section under headings */
+        .section-underheading1 {
+            #font-family: "Aniron", serif;
+            font-size: 1.3rem;
+            #letter-spacing: 1px;
+            color: #b33a3a;
+            margin-top: 5px;
+            margin-right: 100px;
+            margin-left: 100px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .section-heading2 {
+            font-family: 'Aniron', serif;
+            color: #b33a3a;
+            #text-transform: uppercase;
+            font-size: 1.1rem;
+            margin-top: 25px;
+            border-bottom: 1px solid rgba(179, 58, 58, 0.3);
+            break-after: avoid;
+        }
+
+        .section-heading3 {
+            font-family: 'Aniron', serif;
+            color: #a24b4b;
+            #text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            break-after: avoid;
+        }
+
+        .quote-box {
+            margin: 0px 0;
+            padding: 0px 0px;
+            border-left: 3px solid #b33a3a;
+            border-right: 3px solid #b33a3a;
+            background: rgba(179, 58, 58, 0.05);
+            font-style: italic;
+            text-align: center;
+        }
+
+
+
+        .illustration-1col {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .illustration-1col img {
+            width: 100%;
+            max-width: 100%;
+            /* Never wider than its column */
+            height: auto;
+            display: block;
+            margin: 20 auto;
+            mix-blend-mode: multiply;
+            /* Blends sketch with paper */
+
+            /* Boost contrast to make pencil lines sharper */
+            filter: contrast(0.9) brightness(0.9) sepia(0.3);
+
+            /* Layer 1: The Rectangular Edge Fade */
+            /* Layer 2: The Radial Corner Fade */
+            mask-image:
+                linear-gradient(to bottom, transparent, black 1%, black 99%, transparent),
+                linear-gradient(to right, transparent, black 1%, black 99%, transparent);
+
+
+            /* This tells the browser to keep only the area where ALL masks overlap */
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+        }
+
+        .illustration-2col {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .illustration-2col img {
+            width: 95%;
+            max-width: 100%;
+            /* Never wider than its column */
+            height: auto;
+            display: block;
+            margin: 20 auto;
+            mix-blend-mode: multiply;
+            /* Blends sketch with paper */
+
+            /* Boost contrast to make pencil lines sharper */
+            filter: contrast(0.9) brightness(0.9) sepia(0.3);
+
+            /* Layer 1: The Rectangular Edge Fade */
+            /* Layer 2: The Radial Corner Fade */
+            mask-image:
+                linear-gradient(to bottom, transparent, black 1%, black 99%, transparent),
+                linear-gradient(to right, transparent, black 1%, black 99%, transparent);
+
+
+            /* This tells the browser to keep only the area where ALL masks overlap */
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+        }
+
+        .illustration-full {
+            margin: 0px 0px;
+            text-align: center;
+            max-width: 95%;
+        }
+
+        .illustration-full img {
+            width: 95%;
+            max-width: 95%;
+            /* Never wider than its column */
+            height: auto;
+            display: block;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            mix-blend-mode: multiply;
+            /* Blends sketch with paper */
+
+            /* Boost contrast to make pencil lines sharper */
+            filter: contrast(0.9) brightness(0.9) sepia(0.3);
+
+            /* Layer 1: The Rectangular Edge Fade */
+            /* Layer 2: The Radial Corner Fade */
+
+
+            nomask-image: linear-gradient(to right,
+                    transparent 0%,
+                    /* â† MUST start at 0% with transparent */
+                    black 7%,
+                    /* Where full opacity begins */
+                    black 85%,
+                    /* Where full opacity ends */
+                    transparent 100%
+                    /* â† MUST end at 100% with transparent */
+                );
+
+            mask-image:
+                linear-gradient(to right,
+                    rgba(0, 0, 0, 0.000) 0%, rgba(0, 0, 0, 0.007) 1%, rgba(0, 0, 0, 0.047) 2%,
+                    rgba(0, 0, 0, 0.119) 3%, rgba(0, 0, 0, 0.269) 4%, rgba(0, 0, 0, 0.500) 5%,
+                    rgba(0, 0, 0, 0.731) 6%, rgba(0, 0, 0, 0.881) 7%, rgba(0, 0, 0, 0.953) 8%,
+                    rgba(0, 0, 0, 0.993) 9%, rgba(0, 0, 0, 1.000) 10%, rgba(0, 0, 0, 1.000) 90%,
+                    rgba(0, 0, 0, 0.993) 91%, rgba(0, 0, 0, 0.953) 92%, rgba(0, 0, 0, 0.881) 93%,
+                    rgba(0, 0, 0, 0.731) 94%, rgba(0, 0, 0, 0.500) 95%, rgba(0, 0, 0, 0.269) 96%,
+                    rgba(0, 0, 0, 0.119) 97%, rgba(0, 0, 0, 0.047) 98%, rgba(0, 0, 0, 0.007) 99%,
+                    rgba(0, 0, 0, 0.000) 100%),
+                linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.000) 0%, rgba(0, 0, 0, 0.007) 1%, rgba(0, 0, 0, 0.047) 2%,
+                    rgba(0, 0, 0, 0.119) 3%, rgba(0, 0, 0, 0.269) 4%, rgba(0, 0, 0, 0.500) 5%,
+                    rgba(0, 0, 0, 0.731) 6%, rgba(0, 0, 0, 0.881) 7%, rgba(0, 0, 0, 0.953) 8%,
+                    rgba(0, 0, 0, 0.993) 9%, rgba(0, 0, 0, 1.000) 10%, rgba(0, 0, 0, 1.000) 90%,
+                    rgba(0, 0, 0, 0.993) 91%, rgba(0, 0, 0, 0.953) 92%, rgba(0, 0, 0, 0.881) 93%,
+                    rgba(0, 0, 0, 0.731) 94%, rgba(0, 0, 0, 0.500) 95%, rgba(0, 0, 0, 0.269) 96%,
+                    rgba(0, 0, 0, 0.119) 97%, rgba(0, 0, 0, 0.047) 98%, rgba(0, 0, 0, 0.007) 99%,
+                    rgba(0, 0, 0, 0.000) 100%),
+                radial-gradient(ellipse 450% 450% at 50% 50%,
+                    rgba(0, 0, 0, 1.000) 0%, rgba(0, 0, 0, 0.993) 1%, rgba(0, 0, 0, 0.993) 2%,
+                    rgba(0, 0, 0, 0.993) 3%, rgba(0, 0, 0, 0.953) 4%, rgba(0, 0, 0, 0.953) 5%,
+                    rgba(0, 0, 0, 0.881) 6%, rgba(0, 0, 0, 0.818) 7%, rgba(0, 0, 0, 0.731) 8%,
+                    rgba(0, 0, 0, 0.622) 9%, rgba(0, 0, 0, 0.500) 10%, rgba(0, 0, 0, 0.378) 11%,
+                    rgba(0, 0, 0, 0.269) 12%, rgba(0, 0, 0, 0.182) 13%, rgba(0, 0, 0, 0.119) 14%,
+                    rgba(0, 0, 0, 0.047) 15%, rgba(0, 0, 0, 0.047) 16%, rgba(0, 0, 0, 0.007) 17%,
+                    rgba(0, 0, 0, 0.007) 18%, rgba(0, 0, 0, 0.000) 19%, rgba(0, 0, 0, 0.000) 81%,
+                    rgba(0, 0, 0, 0.007) 82%, rgba(0, 0, 0, 0.007) 83%, rgba(0, 0, 0, 0.047) 84%,
+                    rgba(0, 0, 0, 0.047) 85%, rgba(0, 0, 0, 0.119) 86%, rgba(0, 0, 0, 0.182) 87%,
+                    rgba(0, 0, 0, 0.269) 88%, rgba(0, 0, 0, 0.378) 89%, rgba(0, 0, 0, 0.500) 90%,
+                    rgba(0, 0, 0, 0.622) 91%, rgba(0, 0, 0, 0.731) 92%, rgba(0, 0, 0, 0.818) 93%,
+                    rgba(0, 0, 0, 0.881) 94%, rgba(0, 0, 0, 0.953) 95%, rgba(0, 0, 0, 0.953) 96%,
+                    rgba(0, 0, 0, 0.993) 97%, rgba(0, 0, 0, 0.993) 98%, rgba(0, 0, 0, 0.993) 99%,
+                    rgba(0, 0, 0, 1.000) 100%);
+            mask-composite: intersect;
+
+
+        }
+
+        .caption {
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-size: 1.0rem;
+            color: #5e1914;
+            margin-top: 0px;
+            border-bottom: 0px solid rgba(94, 25, 20, 0.2);
+            display: inline-block;
+            padding-top: 0px;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        /* Styling the Left Info Box */
+        .info-box {
+            background: rgba(230, 206, 109, 0.2);
+            /* Faint red/brown wash */
+            border: 1px solid rgba(94, 25, 20, 0.2);
+            padding-left: 5px;
+            padding-right: 2px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            /* Gives it a "tacked-on" look */
+            box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box h4 {
+            font-family: "Morris Roman", serif;
+            color: #5e1914;
+            margin-top: 0;
+            #text-transform: uppercase;
+            border-bottom: 1px solid #5e1914;
+            padding-bottom: 5px;
+        }
+
+        .sidebar-left {
+            /* Keeps the sidebar content from drifting too far up */
+            padding-top: 100px;
+        }
+
+        /* Adjust main content to handle its own columns */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            padding-right: 40px;
+            /* Create a 'safety zone' for the decorative border */
+        }
+
+        li::marker {
+            color: #b33a3a;
+            /* Un rouge sombre typique des livres de règles */
+            #content: "\16c3 ";
+            content: "\25c6  ";
+            /* Losange Unicode */
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* On peut même varier selon le niveau d'imbrication */
+        ul ul li::marker {
+            content: "\2728  ";
+            /* Flèche vide pour les sous-listes */
+        }
